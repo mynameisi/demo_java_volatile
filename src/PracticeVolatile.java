@@ -22,8 +22,10 @@ public class PracticeVolatile {
 class Task extends Thread {
 	private static final Logger logger = LoggerFactory.getLogger(Task.class);
 
+	//1. 设置一个 volatile的boolean变量
 	private volatile boolean running = true;
 
+	//2. 明确run()方法运行的前提是, running是true
 	public void run() {
 		while (running) {
 			try {
@@ -35,6 +37,8 @@ class Task extends Thread {
 		}
 	}
 
+	//3. 设置一个关闭方法，供其他线程使用，把running改成false
+	//   这样其他线程就可以停止run()中进程
 	public void shutdown() {
 		running = false;
 	}
