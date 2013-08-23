@@ -8,13 +8,13 @@ public class PracticeVolatile {
 	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 
-		Task pro = new Task(); // 创建一个线程类：Task的对象
-		pro.start(); // 开始线程
+		Task t1 = new Task(); // 创建一个线程类：Task的对象
+		t1.start(); // 开始线程
 
 		// 挂起程序，用户输入回车后，继续运行
-		new Scanner(System.in).nextLine();
+		new Scanner(System.in).next();
 
-		Task.shutdown(); // 结束线程
+		t1.shutdown(); // 结束线程
 
 	}
 }
@@ -22,7 +22,7 @@ public class PracticeVolatile {
 class Task extends Thread {
 	private static final Logger logger = LoggerFactory.getLogger(Task.class);
 
-	private static volatile boolean running = true;
+	private volatile boolean running = true;
 
 	public void run() {
 		while (running) {
@@ -35,7 +35,7 @@ class Task extends Thread {
 		}
 	}
 
-	public static void shutdown() {
+	public void shutdown() {
 		running = false;
 	}
 }
